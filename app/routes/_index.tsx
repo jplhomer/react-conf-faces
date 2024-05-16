@@ -14,6 +14,11 @@ export const meta: MetaFunction = (context) => {
     username = searchParams.get("username") ?? "";
   }
 
+  if (!username) {
+    // IDK, just want something as a meta image
+    username = "octocat";
+  }
+
   const description = `Find @${username ?? "yourself"} at React Conf 2024`;
 
   return [
