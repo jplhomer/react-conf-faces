@@ -1,16 +1,8 @@
-# Welcome to Remix + Vite!
+# React Conf Faces
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+See yourself as a part of the community at [React Conf 2024](https://www.youtube.com/watch?v=T8TZQ6k4SLE) using a snapshot of one of the slides from the keynote.
 
-## Typegen
-
-Generate types for your Cloudflare bindings in `wrangler.toml`:
-
-```sh
-npm run typegen
-```
-
-You will need to rerun typegen whenever you make changes to `wrangler.toml`.
+A Remix app powered by Cloudflare Pages.
 
 ## Development
 
@@ -26,23 +18,3 @@ To run Wrangler:
 npm run build
 npm run start
 ```
-
-## Deployment
-
-> [!WARNING]  
-> Cloudflare does _not_ use `wrangler.toml` to configure deployment bindings.
-> You **MUST** [configure deployment bindings manually in the Cloudflare dashboard][bindings].
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then, deploy your app to Cloudflare Pages:
-
-```sh
-npm run deploy
-```
-
-[bindings]: https://developers.cloudflare.com/pages/functions/bindings/
