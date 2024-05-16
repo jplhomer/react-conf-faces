@@ -157,7 +157,7 @@ export default function Index() {
           {username && (
             <a
               className="text-xs uppercase flex items-center justify-center gap-2"
-              href={`https://twitter.com/intent/tweet?text=Find%20yourself%20at%20React%20Conf%202024%20https%3A%2F%2Freact-conf-faces.jplhomer.workers.dev%2F${username}`}
+              href={`https://twitter.com/intent/tweet?text=I%20found%20myself%20at%20React%20Conf%202024%20https%3A%2F%2Freact-conf-faces.jplhomer.workers.dev%2F${username}`}
               target="_blank"
             >
               <span>Share on</span>
