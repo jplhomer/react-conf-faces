@@ -120,7 +120,7 @@ export default function Index() {
   }, [username]);
 
   return (
-    <div className="relative">
+    <div className="relative overflow-hidden">
       <div
         className="h-screen bg-center bg-repeat opacity-60"
         style={{
