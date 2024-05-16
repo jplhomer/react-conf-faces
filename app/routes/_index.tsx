@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 export const meta: MetaFunction = (context) => {
   const searchParams = new URLSearchParams(context.location.search);
-  let username = "";
+  let username = context.params.username ?? "";
 
   if (searchParams.has("username")) {
     username = searchParams.get("username") ?? "";
