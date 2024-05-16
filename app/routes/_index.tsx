@@ -50,6 +50,26 @@ export const meta: MetaFunction = (context) => {
       name: "twitter:image:height",
       content: "1080",
     },
+    {
+      name: "og:description",
+      content: description,
+    },
+    {
+      name: "og:image",
+      content: `https://react-conf-snapshots.jplhomer.workers.dev/?username=${username}&version=2`,
+    },
+    {
+      name: "og:image:type",
+      content: "image/jpeg",
+    },
+    {
+      name: "og:image:width",
+      content: "1920",
+    },
+    {
+      name: "og:image:height",
+      content: "1080",
+    },
   ];
 };
 
