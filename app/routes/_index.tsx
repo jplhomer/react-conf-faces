@@ -6,12 +6,49 @@ import {
 import { Form, useLoaderData } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = (context) => {
+  const searchParams = new URLSearchParams(context.location.search);
+  let username = "";
+
+  if (searchParams.has("username")) {
+    username = searchParams.get("username") ?? "";
+  }
+
+  const description = `Find @${username ?? "yourself"} at React Conf`;
+
   return [
-    { title: "New Remix App" },
+    { title: "React Conf Faces" },
     {
       name: "description",
-      content: "Welcome to Remix! Using Vite and Cloudflare!",
+      content: description,
+    },
+    {
+      name: "twitter:card",
+      content: "summary_large_image",
+    },
+    {
+      name: "twitter:title",
+      content: "React Conf Faces",
+    },
+    {
+      name: "twitter:description",
+      content: description,
+    },
+    {
+      name: "twitter:image",
+      content: `https://react-conf-snapshots.jplhomer.workers.dev/?username=${username}&version=2`,
+    },
+    {
+      name: "twitter:image:type",
+      content: "image/jpeg",
+    },
+    {
+      name: "twitter:image:width",
+      content: "1920",
+    },
+    {
+      name: "twitter:image:height",
+      content: "1080",
     },
   ];
 };
@@ -24,11 +61,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
     username = url.searchParams.get("username") ?? "";
   }
 
-  return json({ username });
+  return json({ username, isScreenshot: url.searchParams.has("screenshot") });
 }
 
 export default function Index() {
-  const { username } = useLoaderData<typeof loader>();
+  const { username, isScreenshot } = useLoaderData<typeof loader>();
   const [avatar, setAvatar] = useState<string | null>(null);
   const [numberOfKents, setNumberOfKents] = useState(2);
 
@@ -78,25 +115,27 @@ export default function Index() {
           className="absolute left-1/2 top-1/2 -translate-y-[120px]"
         />
       )}
-      <Form className="absolute left-1/2 bottom-12 -translate-x-1/2 bg-white/90 rounded-lg shadow-2xl p-4 flex flex-col gap-2">
-        <label className="uppercase text-sm block" htmlFor="username">
-          GitHub Username
-        </label>
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="jplhomer"
-          defaultValue={username}
-          className="p-2 border border-gray-300 rounded"
-        />
-        <button
-          className="uppercase bg-black rounded p-2 text-white text-xs"
-          type="submit"
-        >
-          Find Yourself
-        </button>
-      </Form>
+      {!isScreenshot && (
+        <Form className="absolute left-1/2 bottom-12 -translate-x-1/2 bg-white/90 rounded-lg shadow-2xl p-4 flex flex-col gap-2">
+          <label className="uppercase text-sm block" htmlFor="username">
+            GitHub Username
+          </label>
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="jplhomer"
+            defaultValue={username}
+            className="p-2 border border-gray-300 rounded"
+          />
+          <button
+            className="uppercase bg-black rounded p-2 text-white text-xs"
+            type="submit"
+          >
+            Find Yourself
+          </button>
+        </Form>
+      )}
       <div
         id="kent-meter"
         popover="auto"
