@@ -14,7 +14,7 @@ export const meta: MetaFunction = (context) => {
     username = searchParams.get("username") ?? "";
   }
 
-  const description = `Find @${username ?? "yourself"} at React Conf`;
+  const description = `Find @${username ?? "yourself"} at React Conf 2024`;
 
   return [
     { title: "React Conf Faces" },
@@ -73,9 +73,9 @@ export const meta: MetaFunction = (context) => {
   ];
 };
 
-export async function loader({ request }: LoaderFunctionArgs) {
+export async function loader({ request, params }: LoaderFunctionArgs) {
   const url = new URL(request.url);
-  let username = "";
+  let username = params.username ?? "";
 
   if (url.searchParams.has("username")) {
     username = url.searchParams.get("username") ?? "";
@@ -154,6 +154,16 @@ export default function Index() {
           >
             Find Yourself
           </button>
+          {username && (
+            <a
+              className="text-xs uppercase flex items-center justify-center gap-2"
+              href={`https://twitter.com/intent/tweet?text=Find%20yourself%20at%20React%20Conf%202024%20https%3A%2F%2Freact-conf-faces.jplhomer.workers.dev%2F${username}`}
+              target="_blank"
+            >
+              <span>Share on</span>
+              <XLogo className="h-4 w-4" />
+            </a>
+          )}
         </Form>
       )}
       <div
@@ -219,5 +229,23 @@ function KentGrid({ numberOfKents }: { numberOfKents: number }) {
         </button>
       ))}
     </>
+  );
+}
+
+function XLogo({ className }: { className?: string }) {
+  return (
+    <svg
+      width="1200"
+      height="1227"
+      viewBox="0 0 1200 1227"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <path
+        d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6944H306.615L611.412 515.685L658.88 583.579L1055.08 1150.3H892.476L569.165 687.854V687.828Z"
+        fill="black"
+      />
+    </svg>
   );
 }
